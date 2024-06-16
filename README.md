@@ -14,6 +14,72 @@ Can we construct a megarepo that contains multiple, interdependent TypeScript li
 
 ## Change log
 
+### 2️⃣ lib 2: `axhxrx/date`
+
+Since Deno doesn't use `package.json` and all that `node_modules` mess, but we need to have that, use Bun to generate an empty library:
+
+```text
+➜  date git:(main) bun init
+bun init helps you get started with a minimal project and tries to guess sensible defaults. Press ^C anytime to quit
+
+package name (date): 
+entry point (index.ts): 
+
+Done! A package.json file was saved in the current directory.
+ + index.ts
+ + .gitignore
+ + tsconfig.json (for editor auto-complete)
+ + README.md
+
+To get started, run:
+  bun run index.ts
+➜  date git:(main) ✗ bun run index.ts 
+```
+
+Then, confirm that the library works with Deno, Bun, and Node (after bundling). It's just a hello world lib, so if it was already broken at this point, this project would be doomed, but it works as expected:
+
+```text
+➜  date git:(main) ✗ bun run index.ts 
+Hello via Bun!
+➜  date git:(main) deno run index.ts 
+Hello via Bun!
+➜  date git:(main) bun build index.ts --outdir=dist && node dist/index.js
+
+  ./index.js  0.04 KB
+
+[5ms] bundle 1 modules
+Hello via Bun!
+➜  date git:(main) 
+```
+
+Next we move package.json, tsconfig.json, and the .gitignore file that Bun generated to the root directory, instead of `libs/ts/date`. We are aiming to have an "integrated monorepo" with as few config files as we can manager, and everything sharing a single `package.json` file.
+
+OK, but now let's put some real library contents in there so that it imports the other lib. Because this lib will import the previous lib, we add an import like this:
+
+```
+import { assertNever } from '@axhxrx/assert-never';
+```
+
+BOOM! Now we cannot build it, because the monorepo stuff isn't set up:
+
+```
+➜  date git:(main) ✗ deno run mod.ts
+error: Relative import path "@axhxrx/assert-never" not prefixed with / or ./ or ../
+    at file:///Volumes/STUFF/CODE/axhxrx-megarepo-jsr-deno-bun-node-hootenanny/libs/ts/date/mod.ts:1:29
+➜  date git:(main) ✗ bun run mod.ts 
+  🔍 @axhxrx/assert-never [1/1] 
+error: package "@axhxrx/assert-never" not found registry.npmjs.org/@axhxrx%2fassert-never 404
+error: Cannot find module "@axhxrx/assert-never" from "/Volumes/STUFF/CODE/axhxrx-megarepo-jsr-deno-bun-node-hootenanny/libs/ts/date/dateToFormat.ts"
+
+Bun v1.1.13 (macOS arm64)
+➜  date git:(main) ✗ 
+
+```
+
+Let's commit it in this broken state.
+
+
+
 ### 1️⃣ lib 1: `@axhxrx/assert-never`
 
 Added a minimal Deno library, `@axhxrx/assert-never`. This lib doesn't import anything, it's just a base-level lib that other libs will import.

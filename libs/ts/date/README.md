@@ -1,15 +1,11 @@
-# date
+# @axhxrx/date
 
-To install dependencies:
+A minimal utility library for formatting dates. Example:
 
-```bash
-bun install
+```ts 
+const backThen = dateToFormat('YYYY-MM-DD', new Date('1975-01-01T02:00:00Z'));
+// '1975-01-01'
+
+const rightNow = dateToFormat('YYYY-MM-DD');
+// same thing, only later in time...
 ```
-
-To run:
-
-```bash
-bun run index.ts
-```
-
-This project was created using `bun init` in bun v1.1.13. [Bun](https://bun.sh) is a fast all-in-one JavaScript runtime.
