@@ -14,7 +14,26 @@ Can we construct a megarepo that contains multiple, interdependent TypeScript li
 
 ## Change log
 
-- Added a minimal Deno library, `@axhxrx/assert-never`. This lib doesn't import anything, it's just a base-level lib that other libs will import.
+### 1️⃣ lib 1: `@axhxrx/assert-never`
+
+Added a minimal Deno library, `@axhxrx/assert-never`. This lib doesn't import anything, it's just a base-level lib that other libs will import.
+
+This lib doesn't do anything other than export a single function, `assertNever()`.
+
+It could be published to JSR as [`@axhxrx/assert-never@0.1.1`](https://jsr.io/@axhxrx/assert-never@0.1.1)
+
+```text
+➜  axhxrx-megarepo-jsr-deno-bun-node-hootenanny git:(main) cd libs/ts/assert-never 
+➜  assert-never git:(main) deno publish
+Checking for slow types in the public API...
+Visit https://jsr.io/auth?code=VYEB-XFUK to authorize publishing of @axhxrx/assert-never
+Waiting...
+Authorization successful. Authenticated as protiev
+Publishing @axhxrx/assert-never@0.1.1 ...
+Successfully published @axhxrx/assert-never@0.1.1
+Visit https://jsr.io/@axhxrx/assert-never@0.1.1 for details
+➜  assert-never git:(main) 
+```
 
 ## Problem statement (long, with background story)
 
