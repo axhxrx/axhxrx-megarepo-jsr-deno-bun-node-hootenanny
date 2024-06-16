@@ -108,7 +108,35 @@ BOOM! Deno can now run the program:
 ➜  date git:(main) ✗ 
 ```
 
-OK Bun still doesn't work yet, but let's commmit this. 
+OK Bun still doesn't work yet, but let's commmit this. (b67b7c6ff7f24d849c5bb1ec78a7649566895d9a)
+
+OK, onwards to Bun. We add this to `./tsconfig.json`:
+
+```json
+    "paths": {
+      "@axhxrx/assert-never": [
+        "libs/ts/assert-never/mod.ts"
+      ],
+    },
+    "rootDir": ".",
+    "baseUrl": ".",
+```
+
+Et voilà!
+
+```text
+➜  date git:(main) ✗ bun run mod.ts                                    
+2024-06-16 12:28:48
+➜  date git:(main) ✗ 
+➜  date git:(main) ✗ bun build mod.ts --outdir=dist && node dist/mod.js
+
+  ./mod.js  2.63 KB
+
+[2ms] bundle 5 modules
+➜  date git:(main) ✗ # Node didn't print anything but that is expected since it doesn't support import.meta.main — it still ran and succeeded.
+```
+
+OK, let's commit this! We now have a working TypeScript monorepo with 2 libraries, one of which imports the other, and Deno can run/build it thanks to `./import_map.jsonc` and Bun can build/run it thanks to `./tsconfig.json` and Node can run it thanks to Bun being able to build/bundle it. 
 
 
 

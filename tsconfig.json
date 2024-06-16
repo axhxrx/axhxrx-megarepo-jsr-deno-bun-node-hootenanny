@@ -4,6 +4,9 @@
       "@axhxrx/assert-never": [
         "libs/ts/assert-never/mod.ts"
       ],
+    },
+    "rootDir": ".",
+    "baseUrl": ".",
     // Enable latest features
     "lib": ["ESNext", "DOM"],
     "target": "ESNext",
