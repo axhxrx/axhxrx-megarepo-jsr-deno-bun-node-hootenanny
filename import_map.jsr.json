@@ -1,0 +1,7 @@
+{
+  "imports": {
+    "@axhxrx/assert-never": "jsr:@axhxrx/assert-never@latest",
+    "@axhxrx/date": "jsr:@axhxrx/date@latest",
+    "@axhxrx/detect-runtime": "jsr:@axhxrx/detect-runtime@latest"
+  }
+}
