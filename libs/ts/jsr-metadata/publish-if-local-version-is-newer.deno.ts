@@ -70,7 +70,7 @@ console.log('JSR version is old:', isOld);
 
 if (!isOld)
 {
-  console.log('Doing nothing and exiting with exit status 1');
+  console.log('Doing nothing and exiting with exit status 0');
   Deno.exit(0);
 }
 else
