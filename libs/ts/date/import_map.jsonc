@@ -1,0 +1,5 @@
+{
+  "imports": {
+    "@axhxrx/assert-never": "jsr:@axhxrx/assert-never@^0.1.1"
+  }
+}

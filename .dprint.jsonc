@@ -1,0 +1,14 @@
+{
+  "typescript": {
+    "whileStatement.bracePosition": "nextLine",
+    "arrayExpression.trailingCommas": "onlyMultiLine",
+    "quoteStyle": "preferSingle",
+    "quoteProps": "asNeeded",
+    "bracePosition": "nextLine",
+    "preferHanging": true,
+    "nextControlFlowPosition": "nextLine"
+  },
+  "plugins": [
+    "https://plugins.dprint.dev/typescript-0.88.8.wasm"
+  ]
+}

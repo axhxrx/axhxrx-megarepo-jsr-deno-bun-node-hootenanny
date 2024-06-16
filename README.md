@@ -136,9 +136,36 @@ Et voilà!
 ➜  date git:(main) ✗ # Node didn't print anything but that is expected since it doesn't support import.meta.main — it still ran and succeeded.
 ```
 
-OK, let's commit this! We now have a working TypeScript monorepo with 2 libraries, one of which imports the other, and Deno can run/build it thanks to `./import_map.jsonc` and Bun can build/run it thanks to `./tsconfig.json` and Node can run it thanks to Bun being able to build/bundle it. 
+OK, let's commit this!(1ae9704fe28767ae1679b7b4fec838b0d9ad7cc1) We now have a working TypeScript monorepo with 2 libraries, one of which imports the other, and Deno can run/build it thanks to `./import_map.jsonc` and Bun can build/run it thanks to `./tsconfig.json` and Node can run it thanks to Bun being able to build/bundle it. 
 
+#### publish
 
+OK, but we will get errors if we try to publish this. We need to add **another** export map, this time for JSR, so that it understands how to deal with `import { assertNever } from '@axhxrx/assert-never';` — in our megarepo, we want that to map to the local megarepo lib, but for the rest of the world, we need that reference `@axhxrx/assert-never` to resolve to the public, published package.
+
+So, to give the library its own import map for publishing purposes, we add `./libs/ts/date/import_map.jsonc` with contents:
+
+```json
+{
+  "imports": {
+    "@axhxrx/assert-never": "jsr:@axhxrx/assert-never@^0.1.1"
+  }
+}
+```
+
+And then, to reference that during the publish step, add `libs/ts/date/jsr.jsonc` with contents:
+
+```json
+{
+  "name": "@axhxrx/date",
+  "version": "0.1.5",
+  "exports": "./mod.ts",
+  "importMap": "import_map.jsonc"
+}
+```
+
+That's a lot of fuckery to do for every single import we use in every single lib! So hopefully it will be easy to automate. We'll hopefully be able to have every lib share a couple big import_maps: one for megarepo imports, and one for publication.
+
+But anyway let's try this!
 
 ### 1️⃣ lib 1: `@axhxrx/assert-never`
 
