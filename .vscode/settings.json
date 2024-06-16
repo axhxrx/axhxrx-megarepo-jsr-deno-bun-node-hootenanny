@@ -1,7 +1,10 @@
 {
   "deno.enable": true,
   "deno.disablePaths": [
-    "**/bun.spec.ts",
-    "./libs/ts/detect-runtimwwwe"
+    "**/*.bun.spec.ts",
+    "./libs/ts/detect-runtimwwwe",
+    "libs/ts/jsr-metadata/tests.bun.spec.ts",
+    "libs/ts/detect-runtime/tests.bun.spec.ts",
+    "masonmark/2024-06-16/wow/that/is/sad/no/glob/support/here"
   ]
 }
