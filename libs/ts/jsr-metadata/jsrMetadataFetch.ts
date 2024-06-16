@@ -23,7 +23,7 @@
  */
 export const jsrMetadataFetch = async (scopeName: string, packageName: string): Promise<any> =>
 {
-  const datWerxScopeName = !scopeName.startsWith('@')
+  const datWerxScopeName = scopeName.startsWith('@')
     ? scopeName
     : '@' + scopeName;
 
