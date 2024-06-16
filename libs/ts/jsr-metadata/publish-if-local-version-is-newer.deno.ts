@@ -71,10 +71,29 @@ console.log('JSR version is old:', isOld);
 if (!isOld)
 {
   console.log('Doing nothing and exiting with exit status 1');
-  Deno.exit(1);
+  Deno.exit(0);
 }
 else
 {
-  console.log('Will exit with status 0');
+  console.log('🚀🚀🚀 PUBLISHING... ');
+  const publishCommand = new Deno.Command("npx", {
+    args: ["jsr", "publish"],
+    stdout: "piped",
+    stderr: "piped",
+  });
+
+  const { code, stdout, stderr } = await publishCommand.output();
+
+  if (code === 0) {
+    console.log('✅ Published successfully!');
+  } else {
+    console.error('❌ Failed to publish.');
+    const errorString = new TextDecoder().decode(stderr);
+    console.error(errorString);
+    const outputString = new TextDecoder().decode(stdout);
+    console.log(outputString);
+    Deno.exit(code);
+  }
+
   Deno.exit(0);
 }
