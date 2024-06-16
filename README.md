@@ -17,6 +17,86 @@ Can we construct a megarepo that contains multiple, interdependent TypeScript li
 
 ## Change log
 
+### add Angular app
+
+Even the big dog enterprise JS framework supports Bun now, at least for the package management parts. 
+
+```text
+┌[protiev@fed-40-container] [/dev/pts/18] [protiev/add-an-angular-app ⚡] 
+└[~/axhxrx-megarepo-jsr-deno-bun-node-hootenanny/apps]> bunx ng config -g cli.packageManager bun
+┌[protiev@fed-40-container] [/dev/pts/18] [protiev/add-an-angular-app ⚡] 
+└[~/axhxrx-megarepo-jsr-deno-bun-node-hootenanny/apps]> bunx ng config cli.packageManager bun
+Error: Confguration file cannot be found.
+┌[protiev@fed-40-container] [/dev/pts/18] [protiev/add-an-angular-app ⚡] [1]
+└[~/axhxrx-megarepo-jsr-deno-bun-node-hootenanny/apps]> # OK fine, I guess that is just for existing shitz
+┌[protiev@fed-40-container] [/dev/pts/18] [protiev/add-an-angular-app ⚡] [1]
+└[~/axhxrx-megarepo-jsr-deno-bun-node-hootenanny/apps]> 
+┌[protiev@fed-40-container] [/dev/pts/18] [protiev/add-an-angular-app ⚡] [1]
+└[~/axhxrx-megarepo-jsr-deno-bun-node-hootenanny/apps]> bunx ng new angular-app
+? Which stylesheet format would you like to use? Sass (SCSS)     [ https://sass-lang.com/documentation/syntax#scss                ]
+? Do you want to enable Server-Side Rendering (SSR) and Static Site Generation (SSG/Prerendering)? No
+CREATE angular-app/README.md (1071 bytes)
+CREATE angular-app/.editorconfig (274 bytes)
+CREATE angular-app/.gitignore (587 bytes)
+CREATE angular-app/angular.json (2784 bytes)
+CREATE angular-app/package.json (1042 bytes)
+CREATE angular-app/tsconfig.json (1021 bytes)
+CREATE angular-app/tsconfig.app.json (424 bytes)
+CREATE angular-app/tsconfig.spec.json (434 bytes)
+CREATE angular-app/.vscode/extensions.json (130 bytes)
+CREATE angular-app/.vscode/launch.json (470 bytes)
+CREATE angular-app/.vscode/tasks.json (938 bytes)
+CREATE angular-app/src/main.ts (250 bytes)
+CREATE angular-app/src/index.html (296 bytes)
+CREATE angular-app/src/styles.scss (80 bytes)
+CREATE angular-app/src/app/app.component.scss (0 bytes)
+CREATE angular-app/src/app/app.component.html (19903 bytes)
+CREATE angular-app/src/app/app.component.spec.ts (931 bytes)
+CREATE angular-app/src/app/app.component.ts (308 bytes)
+CREATE angular-app/src/app/app.config.ts (310 bytes)
+CREATE angular-app/src/app/app.routes.ts (77 bytes)
+CREATE angular-app/public/favicon.ico (15086 bytes)
+✔ Packages installed successfully.
+    Directory is already under version control. Skipping initialization of git.
+┌[protiev@fed-40-container] [/dev/pts/18] [protiev/add-an-angular-app ⚡] 
+└[~/axhxrx-megarepo-jsr-deno-bun-node-hootenanny/apps]> 
+```
+
+hmm! seems `bunx ng serve` is working, too. 
+
+```text
+└[~/axhxrx-megarepo-jsr-deno-bun-node-hootenanny/apps/angular-app]> bunx ng serve 
+
+Would you like to share pseudonymous usage data about this project with the Angular Team
+at Google under Google's Privacy Policy at https://policies.google.com/privacy. For more
+details and how to change this setting, see https://angular.dev/cli/analytics.
+
+   Yes
+
+Thank you for sharing pseudonymous usage data. Should you change your mind, the following
+command will disable this feature entirely:
+
+    ng analytics disable
+
+Global setting: enabled
+Local setting: enabled
+Effective status: enabled
+Initial chunk files | Names         |  Raw size
+polyfills.js        | polyfills     |  88.34 kB | 
+main.js             | main          |  22.63 kB | 
+styles.css          | styles        |  96 bytes | 
+
+                    | Initial total | 111.06 kB
+
+Application bundle generation complete. [0.562 seconds]
+
+Watch mode enabled. Watching for file changes...
+NOTE: Raw file sizes do not reflect development server per-request transformations.
+  ➜  Local:   http://localhost:4200/
+  ➜  press h + enter to show help
+```
+
+
 ### miscellany
 
 - "deno.disablePaths" settings do not support globs, so to avoid Deno language server annoyingess, we must specify every single incompatible file individually (e.g. "libs/ts/detect-runtime/tests.bun.spec.ts") — obvious candidate for automation
