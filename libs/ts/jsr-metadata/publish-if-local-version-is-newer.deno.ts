@@ -10,8 +10,8 @@ const firstArg = Deno.args[0];
 const secondArg = Deno.args[1];
 const thirdArg = Deno.args[2];
 
-let scopeName: JsrScopeName;
-let packageName: string;
+let scopeName: string = 'axhxrx';
+let packageName = 'WTF_NONEXISTENT_BRO_WTF';
 let localVersionString: string;
 
 if (firstArg && secondArg && thirdArg)
@@ -41,6 +41,7 @@ else
   localVersionString = localJsrMetadataJson.version;
 }
 
+
 if (!localVersionString)
 {
   throw new Error(`No version found in "${cwd}/jsr.json"...`);
@@ -53,18 +54,18 @@ if (typeof localVersionString !== 'string' || localVersionString.length < 5
 }
 console.log(`Local version: ${localVersionString}`);
 
-import { jsrMetadataFetch, JsrScopeName, jsrVersionIsOlderThan } from './mod.ts';
+import { jsrMetadataFetch, jsrVersionIsOlderThan } from './mod.ts';
 
-const remoteMetadata = await jsrMetadataFetch('@axhxrx', 'date');
+const remoteMetadata = await jsrMetadataFetch(`@${scopeName}`, packageName);
 
 if (!remoteMetadata)
 {
-  throw new Error(`No metadata found for "@axhxrx/date"...`);
+  throw new Error(`No metadata found for "@${scopeName}/${packageName}"...`);
 }
 
 console.log(`Remote version: ${remoteMetadata.latest}`);
 
-const isOld = await jsrVersionIsOlderThan('@axhxrx', 'date', localVersionString, remoteMetadata);
+const isOld = await jsrVersionIsOlderThan(`@${scopeName}`, packageName, localVersionString, remoteMetadata);
 
 console.log('JSR version is old:', isOld);
 
