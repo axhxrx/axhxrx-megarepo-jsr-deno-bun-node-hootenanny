@@ -1,0 +1,5 @@
+{
+  "name": "@axhxrx/assert-never",
+  "version": "0.1.1",
+  "exports": "./mod.ts"
+}

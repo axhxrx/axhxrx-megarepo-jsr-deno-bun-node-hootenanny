@@ -1,7 +1,5 @@
 # axhxrx-megarepo-jsr-deno-bun-node-hootenanny
 
-*Brzzzt* Is this thing on?
-
 ## Problem statement (short)
 
 Can we construct a megarepo that contains multiple, interdependent TypeScript libraries and applications, that can:
@@ -13,6 +11,10 @@ Can we construct a megarepo that contains multiple, interdependent TypeScript li
 - [ ] be bundled with esbuild or Bun or whatever, and then run with Node
 - [ ] be published to NPM or equivalent (presumably, JSR.io)
 - [ ] be (somehow, e.g. with a build step) consumed by legacy Node.js apps and Angular apps and whatnot
+
+## Change log
+
+- Added a minimal Deno library, `@axhxrx/assert-never`. This lib doesn't import anything, it's just a base-level lib that other libs will import.
 
 ## Problem statement (long, with background story)
 
