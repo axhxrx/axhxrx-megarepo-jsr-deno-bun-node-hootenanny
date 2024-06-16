@@ -5,11 +5,12 @@
 Can we construct a megarepo that contains multiple, interdependent TypeScript libraries and applications, that can:
 
 - [ ] reasonably conform to the monorepo/megarepo workflow, letting libs import from each other, and apps import from libs, without too much extra fuckery
-- [ ] use non-insane imports with the `.ts` extension
-- [ ] be run with Deno
-- [ ] be run with Bun
-- [ ] be bundled with esbuild or Bun or whatever, and then run with Node
-- [ ] be published to NPM or equivalent (presumably, JSR.io)
+- [x] use non-insane imports with the `.ts` extension
+- [x] be run with Deno
+- [x] be run with Bun
+- [x] be bundled with esbuild or Bun or whatever, and then run with Node
+- [x] be published to NPM or equivalent (presumably, JSR.io)
+- [ ] ...and get that nice provenance verification from JSR?
 - [ ] be (somehow, e.g. with a build step) consumed by legacy Node.js apps and Angular apps and whatnot
 
 ## Change log
@@ -165,7 +166,11 @@ And then, to reference that during the publish step, add `libs/ts/date/jsr.jsonc
 
 That's a lot of fuckery to do for every single import we use in every single lib! So hopefully it will be easy to automate. We'll hopefully be able to have every lib share a couple big import_maps: one for megarepo imports, and one for publication.
 
-But anyway let's try this!
+But anyway let's try this! (437e01ecf3e56a54f7ad7f224772c2a9ef19c288)
+
+And.... dat werx! <https://jsr.io/@axhxrx/date@0.1.5>
+
+So... we can now check off some of the boxes above. We have a monorepo with non-insane '.ts' imports, Deno, Bun, and Node compatibility, and JSR publishing. Maybe the next step is to add one more library, but make it import a.) megarepo libs, b.) NPM packages, and c.) JSR packages.
 
 ### 1️⃣ lib 1: `@axhxrx/assert-never`
 
