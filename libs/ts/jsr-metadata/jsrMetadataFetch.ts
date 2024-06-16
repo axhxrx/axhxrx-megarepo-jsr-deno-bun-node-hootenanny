@@ -49,7 +49,7 @@ import * as semver from "@std/semver";
  @throws some error if something goes wrong
  */
 export const jsrVersionIsOlderThan = async (scopeName: JsrScopeName, packageName: string, otherVersionString: string, jsrMetadata?: {latest: string }): Promise<any> => {
-  const metadata =  await jsrMetadataFetch(scopeName, packageName);
+  const metadata =  jsrMetadata ?? await jsrMetadataFetch(scopeName, packageName);
   const jsrVersionString = metadata.latest;
 
   const jsrVersion = semver.parse(jsrVersionString); 

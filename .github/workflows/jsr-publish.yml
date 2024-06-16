@@ -19,6 +19,12 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: Setup Deno
+        # uses: denoland/setup-deno@v1
+        uses: denoland/setup-deno@61fe2df320078202e33d7d5ad347e7dcfa0e8f31  # v1.1.2
+        with:
+          deno-version: v1.x
+
       - name: Publish libs/ts/assert-never
         working-directory: libs/ts/assert-never
         run: deno run --allow-read --allow-net ../jsr-metadata/local-version-is-newer.deno.ts && npx jsr publish
