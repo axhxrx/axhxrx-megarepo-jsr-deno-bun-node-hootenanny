@@ -15,6 +15,12 @@ Can we construct a megarepo that contains multiple, interdependent TypeScript li
 
 ## Change log
 
+### miscellany
+
+- "deno.disablePaths" settings do not support globs, so to avoid Deno language server annoyingess, we must specify every single incompatible file individually (e.g. "libs/ts/detect-runtime/tests.bun.spec.ts") — obvious candidate for automation
+
+- add a hackneyed initial draft of "check JSR metadata and publish only if local version higher" feature in the GHA automation
+
 ### 3️⃣ lib 3: `@axhxrx/detect-runtime`
 
 Next, add a junk lib that imports the first two. This one will also import `left-pad`, of NPM fame. 😉 That's my test for "can use old NPM package".
@@ -78,6 +84,8 @@ error: npm package '@jsr/libs__logger' does not exist.
 ```
 
 I think this might be some unrelated bug in Deno/JSR though. I'll tackle that separately.
+
+UPDATE: Yeah, the .npmrc file was missing somehow... fixed by adding that back.
 
 
 ### 2️⃣ lib 2: `axhxrx/date`

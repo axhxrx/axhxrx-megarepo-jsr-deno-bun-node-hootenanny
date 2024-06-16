@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@libs/logger": "npm:@jsr/libs__logger",
+    "@std/semver": "npm:@jsr/std__semver",
     "jsr": "^0.12.4",
     "left-pad": "^1.3.0"
   }

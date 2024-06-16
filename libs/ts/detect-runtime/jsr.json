@@ -1,6 +1,6 @@
 {
   "name": "@axhxrx/detect-runtime",
-  "version": "0.1.2",
+  "version": "0.1.7",
   "exports": "./index.ts",
   "importMap": "import_map.json"
 }

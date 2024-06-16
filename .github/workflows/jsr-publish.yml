@@ -19,7 +19,15 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Publish package
+      - name: Publish libs/ts/assert-never
+        working-directory: libs/ts/assert-never
+        run: deno run --allow-read --allow-net ../jsr-metadata/local-version-is-newer.deno.ts && npx jsr publish
+        
+      - name: Publish libs/ts/date
         working-directory: libs/ts/date
-        run: npx jsr publish
+        run: deno run --allow-read --allow-net ../jsr-metadata/local-version-is-newer.deno.ts && npx jsr publish
+        
+      - name: Publish libs/ts/detect-runtime
+        working-directory: libs/ts/detect-runtime
+        run: deno run --allow-read --allow-net ../jsr-metadata/local-version-is-newer.deno.ts && npx jsr publish
         
