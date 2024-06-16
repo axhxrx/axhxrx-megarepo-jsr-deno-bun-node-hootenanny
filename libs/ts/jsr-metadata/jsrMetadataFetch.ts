@@ -1,5 +1,3 @@
-export type JsrScopeName = `@${string}`;
-
 /**
  Fetch metadata about JSR package. E.g.:
  ```ts
@@ -23,10 +21,13 @@ export type JsrScopeName = `@${string}`;
  }
  ```ts
  */
-export const jsrMetadataFetch = async (scopeName: JsrScopeName, packageName: string): Promise<any> =>
+export const jsrMetadataFetch = async (scopeName: string, packageName: string): Promise<any> =>
 {
-  const trimmedScopeName = scopeName.substring(1);
-  const url = `https://jsr.io/@${trimmedScopeName}/${packageName}/meta.json`;
+  const trimmedScopeName = scopeName.startsWith('@')
+    ? scopeName.substring(1)
+    : scopeName;
+
+  const url = `https://jsr.io/${trimmedScopeName}/${packageName}/meta.json`;
   const response = await fetch(url, {
     headers: {
       'User-Agent': 'JSR Metadata Fetcher',
@@ -48,7 +49,7 @@ import * as semver from "@std/semver";
 
  @throws some error if something goes wrong
  */
-export const jsrVersionIsOlderThan = async (scopeName: JsrScopeName, packageName: string, otherVersionString: string, jsrMetadata?: {latest: string }): Promise<any> => {
+export const jsrVersionIsOlderThan = async (scopeName: string, packageName: string, otherVersionString: string, jsrMetadata?: {latest: string }): Promise<any> => {
   const metadata =  jsrMetadata ?? await jsrMetadataFetch(scopeName, packageName);
   const jsrVersionString = metadata.latest;
 

@@ -39,6 +39,17 @@ else
   const localJsrMetadata = Deno.readTextFileSync(pathToJsrMetadata);
   const localJsrMetadataJson = JSON.parse(localJsrMetadata);
   localVersionString = localJsrMetadataJson.version;
+
+  const nameComponents = localJsrMetadataJson.name.split('/');
+  scopeName = nameComponents[0];
+  packageName = nameComponents[1];
+
+  if (!localVersionString || !scopeName || !packageName) {
+    console.error('ERR_BOGUS_JSR_JSON: bogus JSON in "${cwd}/jsr.json"', localJsrMetadataJson);
+    throw new Error(
+      `No version found in "${cwd}/jsr.json" or weird name in "${cwd}/jsr.json"...`,
+    );
+  }
 }
 
 
@@ -56,16 +67,16 @@ console.log(`Local version: ${localVersionString}`);
 
 import { jsrMetadataFetch, jsrVersionIsOlderThan } from './mod.ts';
 
-const remoteMetadata = await jsrMetadataFetch(`@${scopeName}`, packageName);
+const remoteMetadata = await jsrMetadataFetch(scopeName, packageName);
 
 if (!remoteMetadata)
 {
-  throw new Error(`No metadata found for "@${scopeName}/${packageName}"...`);
+  throw new Error(`No metadata found for "${scopeName}/${packageName}"...`);
 }
 
 console.log(`Remote version: ${remoteMetadata.latest}`);
 
-const isOld = await jsrVersionIsOlderThan(`@${scopeName}`, packageName, localVersionString, remoteMetadata);
+const isOld = await jsrVersionIsOlderThan(scopeName, packageName, localVersionString, remoteMetadata);
 
 console.log('JSR version is old:', isOld);
 
