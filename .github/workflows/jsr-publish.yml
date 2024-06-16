@@ -1,8 +1,11 @@
 name: Publish
 on:
-  push:
-    branches:
-      - main
+  # push:
+  #   branches:
+  #     - release
+
+  workflow_dispatch:
+
 
 jobs:
   publish:
@@ -12,6 +15,7 @@ jobs:
       contents: read
       id-token: write
 
+    # TODO: A potential idea here would be to walk the libs hierarchy and only publish the packages that have newer versions specified than what is already published.
     steps:
       - uses: actions/checkout@v4
 
