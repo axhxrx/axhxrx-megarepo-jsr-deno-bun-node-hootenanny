@@ -4,6 +4,12 @@
       "@axhxrx/assert-never": [
         "libs/ts/assert-never/mod.ts"
       ],
+    "@axhxrx/date": [
+      "./libs/ts/date/mod.ts"
+    ],
+    "@axhxrx/detect-runtime": [
+      "./libs/ts/detect-runtime/index.ts"
+    ]
     },
     "rootDir": ".",
     "baseUrl": ".",
