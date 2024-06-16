@@ -2,6 +2,8 @@
   "imports": {
     "@axhxrx/assert-never": "jsr:@axhxrx/assert-never@^0.2.0",
     "@axhxrx/date": "jsr:@axhxrx/date@^0.2.0",
-    "@axhxrx/detect-runtime": "jsr:@axhxrx/detect-runtime@^0.2.0"
+    "@axhxrx/detect-runtime": "jsr:@axhxrx/detect-runtime@^0.2.0",
+    "left-pad": "npm:left-pad@1.3.0",
+    "@libs/logger": "jsr:@libs/logger@^1.1.2"
   }
 }

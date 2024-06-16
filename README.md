@@ -23,6 +23,52 @@ Can we construct a megarepo that contains multiple, interdependent TypeScript li
 
 - add a hackneyed initial draft of "check JSR metadata and publish only if local version higher" feature in the GHA automation
 
+- **PROBLEM:** The publishing step seems to require maintaining the export_map.json file in pretty manual fashion. The publish step failed until we fixed various things by duplicating info from the `package.json` file into the `export_map.jsr.json` file. Considering we have only 3 tiny test libs so far, this could be a deal-breaking hassle with a real monorepo of 100s of packages, unless reliably automated.
+
+```text
+└[~/axhxrx-megarepo-jsr-deno-bun-node-hootenanny/libs/ts/detect-runtime]> bunx jsr publish --allow-dirty
+Checking for slow types in the public API...
+Visit https://jsr.io/auth?code=NAXW-TTBA to authorize publishing of @axhxrx/detect-runtime
+Waiting...
+Authorization successful. Authenticated as protiev
+Publishing @axhxrx/detect-runtime@0.2.0 ...
+error: Failed to publish @axhxrx/detect-runtime@0.2.0
+
+Caused by:
+    Failed to publish @axhxrx/detect-runtime at 0.2.0: failed to build module graph: Module not found "file:///@libs/logger".
+        at file:///Loginator.ts:1:22
+Child process exited with: 1
+┌[protiev@fed-40-container] [/dev/pts/18] [main ⚡] [1]
+└[~/axhxrx-megarepo-jsr-deno-bun-node-hootenanny/libs/ts/detect-runtime]> bunx jsr publish --allow-dirty
+Checking for slow types in the public API...
+Visit https://jsr.io/auth?code=CQWD-MAHK to authorize publishing of @axhxrx/detect-runtime
+Waiting...
+Authorization successful. Authenticated as protiev
+Publishing @axhxrx/detect-runtime@0.2.0 ...
+error: Failed to publish @axhxrx/detect-runtime@0.2.0
+
+Caused by:
+    Failed to publish @axhxrx/detect-runtime at 0.2.0: specifier 'npm:left-pad' is missing a version constraint
+Child process exited with: 1
+┌[protiev@fed-40-container] [/dev/pts/18] [main ⚡] [1]
+└[~/axhxrx-megarepo-jsr-deno-bun-node-hootenanny/libs/ts/detect-runtime]> bunx jsr publish --allow-dirty
+error: Could not find a matching package for 'npm:left-pad:1.3.0' in '/home/protiev/axhxrx-megarepo-jsr-deno-bun-node-hootenanny/package.json'. You must specify this as a package.json dependency when the node_modules folder is not managed by Deno.
+    at file:///home/protiev/axhxrx-megarepo-jsr-deno-bun-node-hootenanny/libs/ts/detect-runtime/leftPadRuntimeName.ts:1:46
+Child process exited with: 1
+┌[protiev@fed-40-container] [/dev/pts/18] [main ⚡] [1]
+└[~/axhxrx-megarepo-jsr-deno-bun-node-hootenanny/libs/ts/detect-runtime]> bunx jsr publish --allow-dirty
+Checking for slow types in the public API...
+Visit https://jsr.io/auth?code=UJAF-BLMG to authorize publishing of @axhxrx/detect-runtime
+Waiting...
+Authorization successful. Authenticated as protiev
+Publishing @axhxrx/detect-runtime@0.2.0 ...
+Successfully published @axhxrx/detect-runtime@0.2.0
+Visit https://jsr.io/@axhxrx/detect-runtime@0.2.0 for details
+
+Completed in 48s
+┌[protiev@fed-40-container] [/dev/pts/18] [main ⚡] 
+```
+
 ### 3️⃣ lib 3: `@axhxrx/detect-runtime`
 
 Next, add a junk lib that imports the first two. This one will also import `left-pad`, of NPM fame. 😉 That's my test for "can use old NPM package".
