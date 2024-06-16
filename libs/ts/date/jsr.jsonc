@@ -2,5 +2,5 @@
   "name": "@axhxrx/date",
   "version": "0.1.6",
   "exports": "./mod.ts",
-  "importMap": "import_map.jsonc"
+  "importMap": "import_map.json"
 }

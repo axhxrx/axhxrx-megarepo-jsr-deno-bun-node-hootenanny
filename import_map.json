@@ -1,0 +1,5 @@
+{
+  "imports": {
+    "@axhxrx/assert-never": "./libs/ts/assert-never/mod.ts",
+  }
+}

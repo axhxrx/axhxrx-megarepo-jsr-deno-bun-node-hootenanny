@@ -87,11 +87,11 @@ OK, so let's try to fix that.
 
 ```json
 {
-  "importMap": "import_map.jsonc",
+  "importMap": "import_map.json",
 }
 ```
 
-4. Add an `import_map.jsonc` file in the root of the repo, with contents:
+4. Add an `import_map.json` file in the root of the repo, with contents:
 
 ```json
 {
@@ -137,13 +137,13 @@ Et voilà!
 ➜  date git:(main) ✗ # Node didn't print anything but that is expected since it doesn't support import.meta.main — it still ran and succeeded.
 ```
 
-OK, let's commit this!(1ae9704fe28767ae1679b7b4fec838b0d9ad7cc1) We now have a working TypeScript monorepo with 2 libraries, one of which imports the other, and Deno can run/build it thanks to `./import_map.jsonc` and Bun can build/run it thanks to `./tsconfig.json` and Node can run it thanks to Bun being able to build/bundle it. 
+OK, let's commit this!(1ae9704fe28767ae1679b7b4fec838b0d9ad7cc1) We now have a working TypeScript monorepo with 2 libraries, one of which imports the other, and Deno can run/build it thanks to `./import_map.json` and Bun can build/run it thanks to `./tsconfig.json` and Node can run it thanks to Bun being able to build/bundle it. 
 
 #### publish
 
 OK, but we will get errors if we try to publish this. We need to add **another** export map, this time for JSR, so that it understands how to deal with `import { assertNever } from '@axhxrx/assert-never';` — in our megarepo, we want that to map to the local megarepo lib, but for the rest of the world, we need that reference `@axhxrx/assert-never` to resolve to the public, published package.
 
-So, to give the library its own import map for publishing purposes, we add `./libs/ts/date/import_map.jsonc` with contents:
+So, to give the library its own import map for publishing purposes, we add `./libs/ts/date/import_map.json` with contents:
 
 ```json
 {
@@ -160,7 +160,7 @@ And then, to reference that during the publish step, add `libs/ts/date/jsr.jsonc
   "name": "@axhxrx/date",
   "version": "0.1.5",
   "exports": "./mod.ts",
-  "importMap": "import_map.jsonc"
+  "importMap": "import_map.json"
 }
 ```
 
@@ -304,7 +304,7 @@ OK so after fucking around a little bit, it was clear that it is at least *techn
 2. Can be run with Deno.
 3. Can be run with Bun.
 4. Can be run with Node, if you bundle them first (with esbuild or Bun or whatever, it seems like there are several options).
-5. Can import from each other normally, within the megarepo, via a combination of TypeScript path mappings (`compiler_options.paths`) **and** equivalent entries in `import_map.jsonc`
+5. Can import from each other normally, within the megarepo, via a combination of TypeScript path mappings (`compiler_options.paths`) **and** equivalent entries in `import_map.json`
 6. Can be (optionally) published individually to [JSR.io](https://jsr.io), and therefore also be consumed by legacy Node.js apps and code via JSR's [npm compatibility layer](https://jsr.io/docs/npm-compatibility).
 
 As of this writing as of 2024-06-16 it is still not quite clear:
