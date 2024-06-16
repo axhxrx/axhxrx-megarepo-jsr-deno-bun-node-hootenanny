@@ -1,5 +1,7 @@
 # axhxrx-megarepo-jsr-deno-bun-node-hootenanny
 
+This is a test monorepo/megarepo for the purpose of testing JSR.io packages, and Deno/Bun/Node interoperability in a monorepo/megarepo context. The libs it publishes are just minimal ones for the purpose of testing that out. **😙 THIS MAY NOT BE USEFUL**
+
 ## Problem statement (short)
 
 Can we construct a megarepo that contains multiple, interdependent TypeScript libraries and applications, that can:
@@ -10,7 +12,7 @@ Can we construct a megarepo that contains multiple, interdependent TypeScript li
 - [x] be run with Bun
 - [x] be bundled with esbuild or Bun or whatever, and then run with Node
 - [x] be published to NPM or equivalent (presumably, JSR.io)
-- [ ] ...and get that nice provenance verification from JSR?
+- [x] ...and get that nice provenance verification from JSR? 
 - [ ] be (somehow, e.g. with a build step) consumed by legacy Node.js apps and Angular apps and whatnot
 
 ## Change log
