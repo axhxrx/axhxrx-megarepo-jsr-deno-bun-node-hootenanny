@@ -4,6 +4,8 @@
 import { dateToFormat } from '@axhxrx/date';
 import { assertNever } from '@axhxrx/assert-never';
 import { detectRuntime } from './detectRuntime.ts';
+import { leftPaddedRuntimeName } from "./leftPadRuntimeName.ts";
+import { Loginator } from './Loginator.ts';
 
 const result = detectRuntime();
 
@@ -17,6 +19,14 @@ if (import.meta.main)
     (via @axhxrx/date)
     `);
   console.log(result);
+
+  console.log('--------------------')
+  console.log(leftPaddedRuntimeName(result));
+  console.log('--------------------')
+
+  const logger = Loginator;
+
+  logger.info("Loginator message", { name: "zfx" });
 }
 
 if (result.isNode || result.isUnknown)

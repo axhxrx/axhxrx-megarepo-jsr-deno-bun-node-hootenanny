@@ -9,6 +9,8 @@
     "typescript": "^5.4.5"
   },
   "dependencies": {
-    "jsr": "^0.12.4"
+    "@libs/logger": "npm:@jsr/libs__logger",
+    "jsr": "^0.12.4",
+    "left-pad": "^1.3.0"
   }
 }

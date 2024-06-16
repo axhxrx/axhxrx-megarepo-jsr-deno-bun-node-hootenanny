@@ -1,0 +1,7 @@
+{
+  "deno.enable": true,
+  "deno.disablePaths": [
+    "**/bun.spec.ts",
+    "./libs/ts/detect-runtimwwwe"
+  ]
+}

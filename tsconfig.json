@@ -13,6 +13,10 @@
     },
     "rootDir": ".",
     "baseUrl": ".",
+
+    // @masonmark 2024-06-16: Had to enable this to use ancient NPM dep 
+    "esModuleInterop": true,
+    
     // Enable latest features
     "lib": ["ESNext", "DOM"],
     "target": "ESNext",

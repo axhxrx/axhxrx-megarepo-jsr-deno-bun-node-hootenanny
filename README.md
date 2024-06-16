@@ -15,6 +15,71 @@ Can we construct a megarepo that contains multiple, interdependent TypeScript li
 
 ## Change log
 
+### 3️⃣ lib 3: `@axhxrx/detect-runtime`
+
+Next, add a junk lib that imports the first two. This one will also import `left-pad`, of NPM fame. 😉 That's my test for "can use old NPM package".
+
+```text
+➜  detect-runtime git:(main) ✗ bun add left-pad
+bun add v1.1.13 (bd6a6051)
+
+installed left-pad@1.3.0
+
+1 package installed [559.00ms]
+➜  detect-runtime git:(main) ✗
+```
+
+~~**PROBLEM:** This makes Deno's language server start freaking out.~~ Oh wait, it doesn't. It actually works fine, I just had a typo. Wow! Cool. 
+
+OK and now we have a third lib, which imports the other two from the monorepo, **and** [left-pad](https://www.npmjs.com/package/left-pad) from NPM. 
+
+Cool let's add a dependency on a JSR package, too, although we will have to use the Nody way (but we're using Bun so I will use `bunx` and not `npx`):
+
+```text
+➜  detect-runtime git:(main) ✗ bunx jsr add @libs/logger         
+
+Installing @libs/logger...
+$ bun add @libs/logger@npm:@jsr/libs__logger
+bun add v1.1.13 (bd6a6051)
+
+installed @libs/logger@1.1.2
+
+1 package installed [655.00ms]
+
+Completed in 682ms
+➜  detect-runtime git:(main) ✗ bun run index.ts
+```
+Hmm it works in Bun, but not Deno:
+
+```text
+➜  detect-runtime git:(main) ✗ bun run index.ts
+
+    Hello via Bun!  
+    The date is: 2024-06-16 16:04:56 
+    (via @axhxrx/date)
+    
+{
+  name: "Bun",
+  version: "1.1.13",
+  isDeno: false,
+  isBun: true,
+  isNode: false,
+  isUnknown: false,
+}
+--------------------
+                 Bun
+--------------------
+ INFO  │ +0.011      Loginator message {
+  name: "zfx",
+}
+➜  detect-runtime git:(main) ✗ deno run index.ts
+error: npm package '@jsr/libs__logger' does not exist.
+➜  detect-runtime git:(main) ✗ deno run index.ts
+```
+
+I think this might be some unrelated bug in Deno/JSR though. I'll tackle that separately.
+
+
 ### 2️⃣ lib 2: `axhxrx/date`
 
 Since Deno doesn't use `package.json` and all that `node_modules` mess, but we need to have that, use Bun to generate an empty library:
