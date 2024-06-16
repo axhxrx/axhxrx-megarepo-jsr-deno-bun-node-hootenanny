@@ -1,0 +1,6 @@
+{
+  "importMap": "import_map.jsonc",
+  // "unstable": [
+  //   "sloppy-imports"
+  // ]
+}

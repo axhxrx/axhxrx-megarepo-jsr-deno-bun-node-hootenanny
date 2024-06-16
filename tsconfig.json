@@ -1,5 +1,9 @@
 {
   "compilerOptions": {
+    "paths": {
+      "@axhxrx/assert-never": [
+        "libs/ts/assert-never/mod.ts"
+      ],
     // Enable latest features
     "lib": ["ESNext", "DOM"],
     "target": "ESNext",

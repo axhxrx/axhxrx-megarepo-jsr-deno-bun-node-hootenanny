@@ -1,4 +1,5 @@
 {
+  "extends": "../../../deno.jsonc",
   "name": "@axhxrx/date",
   "version": "0.1.4",
   "exports": "./mod.ts",

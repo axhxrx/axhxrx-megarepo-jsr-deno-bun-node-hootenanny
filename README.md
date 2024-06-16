@@ -76,7 +76,39 @@ Bun v1.1.13 (macOS arm64)
 
 ```
 
-Let's commit it in this broken state.
+Let's commit it in this broken state. (e6fcfd33713f68814648a0bbf933e0710fcf23c8)
+
+OK, so let's try to fix that.
+
+1. Change the lib so that when it is run it prints the date.
+2. Rename `libs/ts/date/deno.json` to `libs/ts/date/deno.json.OFF` because unfortunately [Deno does not support one config gile extending another](https://github.com/denoland/deno/issues/18132)
+3. Add a `deno.jsonc` file in the root of the repo, with contents:
+
+```json
+{
+  "importMap": "import_map.jsonc",
+}
+```
+
+4. Add an `import_map.jsonc` file in the root of the repo, with contents:
+
+```json
+{
+  "imports": {
+    "@axhxrx/assert-never": "./libs/ts/assert-never/mod.ts"
+  }
+}
+```
+
+BOOM! Deno can now run the program:
+
+```text
+➜  date git:(main) ✗ deno run mod.ts
+2024-06-16 12:18:18
+➜  date git:(main) ✗ 
+```
+
+OK Bun still doesn't work yet, but let's commmit this. 
 
 
 
