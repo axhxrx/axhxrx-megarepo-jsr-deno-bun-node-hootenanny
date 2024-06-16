@@ -29,6 +29,9 @@ jobs:
 
       - run: bun install
 
+      - name: npm install
+        run: npm install          
+
       - name: Publish libs/ts/assert-never if needed...
         working-directory: libs/ts/assert-never
         run: deno run --allow-read --allow-net --allow-run ../jsr-metadata/publish-if-local-version-is-newer.deno.ts
