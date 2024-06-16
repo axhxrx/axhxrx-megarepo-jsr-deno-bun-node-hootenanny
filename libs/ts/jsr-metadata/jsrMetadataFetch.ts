@@ -23,11 +23,11 @@
  */
 export const jsrMetadataFetch = async (scopeName: string, packageName: string): Promise<any> =>
 {
-  const trimmedScopeName = scopeName.startsWith('@')
-    ? scopeName.substring(1)
-    : scopeName;
+  const datWerxScopeName = !scopeName.startsWith('@')
+    ? scopeName
+    : '@' + scopeName;
 
-  const url = `https://jsr.io/${trimmedScopeName}/${packageName}/meta.json`;
+  const url = `https://jsr.io/${datWerxScopeName}/${packageName}/meta.json`;
   const response = await fetch(url, {
     headers: {
       'User-Agent': 'JSR Metadata Fetcher',
