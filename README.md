@@ -96,6 +96,41 @@ NOTE: Raw file sizes do not reflect development server per-request transformatio
   ➜  press h + enter to show help
 ```
 
+#### TL;DR Angular doesn't fit well into this kind of env
+
+##### You cannot build the Angular app if you make it's tsconfig.json extend the root one:
+
+```text
+└[~/axhxrx-megarepo-jsr-deno-bun-node-hootenanny/apps/angular-app]> bunx ng serve
+Application bundle generation failed. [0.535 seconds]
+
+✘ [ERROR] File 'src/main.ts' is missing from the TypeScript compilation. [plugin angular-compiler]
+
+  Ensure the file is part of the TypeScript program via the 'files' or 'include' property.
+
+
+Watch mode enabled. Watching for file changes...
+```
+
+##### You can't use the monorepo libs in the Angular app, because Angular can't use non-insane imports
+
+If we give the Angular app its own tsconfig.json, the app works. But, it cannot use the libs:
+
+```text
+Application bundle generation failed. [0.048 seconds]
+
+✘ [ERROR] TS5097: An import path can only end with a '.ts' extension when 'allowImportingTsExtensions' is enabled. [plugin angular-compiler]
+
+    ../../libs/ts/assert-never/mod.ts:1:14:
+      1 │ export * from './assertNever.ts';
+        ╵               ~~~~~~~~~~~~~~~~~~
+```
+
+That was expected, and seems true. And you can't enable the "allowImportingTsExtensions" option in the Angular app's tsconfig.json, because it's not supported. The build doesn't work then, because it (I presume) relies on tsc to emit code.
+
+So ANYWAY at a glance the only solution for Angular is to build the monorepo libs, and import them from `./dist` or wherever. But that requires some tooling like Nx or Turborepo (maybe?) or moonrepo or.... *waves hands vaguely*
+
+In other words, pretty much what we expected!
 
 ### miscellany
 
