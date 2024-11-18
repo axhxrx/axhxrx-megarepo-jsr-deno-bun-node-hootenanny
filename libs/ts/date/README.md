@@ -10,7 +10,7 @@ const rightNow = dateToFormat('YYYY-MM-DD');
 // same thing, only later in time...
 ```
 
-NOTE: This library works, as far as that goes, but it is intended mainly for testing JSR/Deno/Bun/Node/monorepo publishing, and not intended to actually be useful. (Just so you know 😉.)
+NOTE: This library works, as far as that goes, but it is intended mainly for testing JSR/Deno/Bun/Node/monorepo publishing, and not intended to actually be useful. (Just so you know. 😉)
 
 ## test
 
