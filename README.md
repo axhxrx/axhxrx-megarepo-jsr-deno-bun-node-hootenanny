@@ -19,7 +19,7 @@ Can we construct a megarepo that contains multiple, interdependent TypeScript li
 
 ### miscellany
 
-- "deno.disablePaths" settings do not support globs, so to avoid Deno language server annoyingess, we must specify every single incompatible file individually (e.g. "libs/ts/detect-runtime/tests.bun.spec.ts") — obvious candidate for automation
+- "deno.disablePaths" settings do not support globs, so to avoid Deno language server annoyingness, we must specify every single incompatible file individually (e.g. "libs/ts/detect-runtime/tests.bun.spec.ts") — obvious candidate for automation
 
 - add a hackneyed initial draft of "check JSR metadata and publish only if local version higher" feature in the GHA automation
 
